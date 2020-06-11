@@ -3,6 +3,7 @@ name = "yaga"
 version = "0.1.0"
 description = "Yet Another Great Automator"
 authors = ["Joseph Egan <joseph.s.egan@gmail.com>"]
+license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.8"
