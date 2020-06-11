@@ -5,6 +5,8 @@ description = "Yet Another Great Automator"
 authors = ["Joseph Egan <joseph.s.egan@gmail.com>"]
 license = "MIT"
 
+repository = "https://github.com/eganjs/yaga"
+
 [tool.poetry.dependencies]
 python = "^3.8"
 click = "^7.1.2"
