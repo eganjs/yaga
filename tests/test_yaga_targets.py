@@ -74,3 +74,52 @@ def test_multiple_rules_in_single_file():
             //:rule_2
             """
         )
+
+
+def test_multiple_rules_in_directory_tree():
+    runner = CliRunner()
+    with runner.isolated_filesystem():
+        Path("BUILD").write_text(
+            dedent(
+                """\
+                genrule(
+                    name = "rule_1",
+                )
+                """
+            )
+        )
+
+        subdirectory = Path("subdirectory")
+        subdirectory.mkdir()
+        (subdirectory / "BUILD").write_text(
+            dedent(
+                """\
+                genrule(
+                    name = "rule_2",
+                )
+                """
+            )
+        )
+
+        sub_subdirectory = subdirectory / "sub-subdirectory"
+        sub_subdirectory.mkdir()
+        (sub_subdirectory / "BUILD").write_text(
+            dedent(
+                """\
+                genrule(
+                    name = "rule_3",
+                )
+                """
+            )
+        )
+
+        result = runner.invoke(cli, ["targets"])
+
+        assert result.exit_code == 0
+        assert result.output == dedent(
+            """\
+            //:rule_1
+            //subdirectory:rule_2
+            //subdirectory/sub-subdirectory:rule_3
+            """
+        )

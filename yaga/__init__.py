@@ -14,13 +14,15 @@ def cli():
 def targets():
     rules = []
 
-    build_file = Path("BUILD")
-    if build_file.exists():
+    build_files = Path(".").glob("**/BUILD")
+    for build_file in build_files:
+        if build_file.exists():
+            path = "/".join(build_file.parts[:-1])
 
-        def genrule(name):
-            rules.append(name)
+            def genrule(name):  # noqa
+                rules.append(f"//{path}:{name}")
 
-        exec(build_file.read_text())
+            exec(build_file.read_text())
 
     for rule in rules:
-        click.echo(f"//:{rule}")
+        click.echo(rule)
