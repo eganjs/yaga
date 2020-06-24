@@ -3,6 +3,7 @@ __version__ = "0.1.0"
 from pathlib import Path
 
 import click
+from click import ClickException
 
 
 @click.group()
@@ -14,10 +15,12 @@ def cli():
 def targets():
     rules = []
 
-    build_files = Path(".").glob("**/BUILD")
+    workspace = _resolve_workspace()
+
+    build_files = workspace.glob("**/BUILD")
     for build_file in build_files:
         if build_file.exists():
-            path = "/".join(build_file.parts[:-1])
+            path = "/".join(build_file.relative_to(workspace).parts[:-1])
 
             def genrule(name):  # noqa
                 rules.append(f"//{path}:{name}")
@@ -26,3 +29,11 @@ def targets():
 
     for rule in rules:
         click.echo(rule)
+
+
+def _resolve_workspace():
+    cwd = Path.cwd()
+    for path in [cwd, *cwd.parents]:
+        if (path / "WORKSPACE").is_file():
+            return path
+    raise ClickException("Could not find directory containing WORKSPACE file")

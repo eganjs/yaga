@@ -3,7 +3,7 @@
 lint:
 	poetry run flake8
 	poetry run isort --check-only --recursive .
-	poetry run black --check .
+	poetry run black --check --diff .
 
 fmt:
 	poetry run isort --recursive .
