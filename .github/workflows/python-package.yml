@@ -39,6 +39,7 @@ jobs:
       shell: bash
       run: |
         pwd
+        ls -alh
         make lint
 
   test:
@@ -86,4 +87,5 @@ jobs:
       shell: bash
       run: |
         pwd
+        ls -alh
         make test
