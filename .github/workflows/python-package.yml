@@ -27,7 +27,7 @@ jobs:
       shell: bash
       run: |
         curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
-        echo "::set-env name=PATH::$HOME/.poetry/bin:$PATH"
+        echo "::add-path::$HOME/.poetry/bin"
 
     - name: Set up cache
       uses: actions/cache@v2
@@ -55,7 +55,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [Ubuntu, MacOS, Windows]
+        os: [ubuntu, macos, windows]
         python-version: [3.6, 3.7, 3.8]
 
     steps:
@@ -75,7 +75,12 @@ jobs:
       shell: bash
       run: |
         curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
-        echo "::set-env name=PATH::$HOME/.poetry/bin:$PATH"
+        echo "::add-path::$HOME/.poetry/bin"
+
+    - name: Setup PATH for the default shell on windows
+      if: matrix.os == 'windows'
+      run: |
+        echo "::add-path::$HOME/.poetry/bin"
 
     - name: Set up cache
       uses: actions/cache@v2
