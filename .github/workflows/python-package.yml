@@ -38,6 +38,7 @@ jobs:
     - name: Lint
       shell: bash
       run: |
+        pwd
         make lint
 
   test:
@@ -84,4 +85,5 @@ jobs:
     - name: Test
       shell: bash
       run: |
+        pwd
         make test
