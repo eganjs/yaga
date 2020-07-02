@@ -98,6 +98,27 @@ def test_multiple_rules_in_single_file():
         assert result.exit_code == 0
 
 
+def test_multiple_empty_files_in_directory_tree():
+    runner = CliRunner()
+    with runner.isolated_filesystem():
+        Path("WORKSPACE").touch()
+
+        Path("BUILD").touch()
+
+        subdirectory = Path("subdirectory")
+        subdirectory.mkdir()
+        (subdirectory / "BUILD").touch()
+
+        sub_subdirectory = subdirectory / "sub-subdirectory"
+        sub_subdirectory.mkdir()
+        (sub_subdirectory / "BUILD").touch()
+
+        result = runner.invoke(cli, ["targets"])
+
+        assert result.output == ""
+        assert result.exit_code == 0
+
+
 def test_multiple_rules_in_directory_tree():
     runner = CliRunner()
     with runner.isolated_filesystem():
