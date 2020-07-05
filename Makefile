@@ -2,11 +2,11 @@
 
 lint: .venv
 	poetry run flake8 --exclude .venv
-	poetry run isort --check-only --recursive .
+	poetry run isort --check-only --profile black .
 	poetry run black --check --diff .
 
 fmt: .venv
-	poetry run isort --recursive .
+	poetry run isort --profile black .
 	poetry run black .
 
 test: .venv
