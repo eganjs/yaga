@@ -15,8 +15,8 @@ test: .venv
 .venv: poetry.lock
 	poetry config virtualenvs.in-project true
 	poetry install
-	@touch .venv
+	@touch --no-create .venv
 
 poetry.lock: pyproject.toml
 	poetry update
-	@touch poetry.lock
+	@touch --no-create poetry.lock
