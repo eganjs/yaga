@@ -20,11 +20,9 @@ jobs:
 
     - name: Get full Python version
       id: full-python-version
-      shell: bash
       run: echo ::set-output name=version::$(python -c "import sys; print('-'.join(str(v) for v in sys.version_info))")
 
     - name: Install Poetry
-      shell: bash
       run: |
         curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
         echo "::add-path::$HOME/.poetry/bin"
@@ -38,14 +36,10 @@ jobs:
 
     - name: Ensure cache is healthy
       if: steps.cache.outputs.cache-hit == 'true'
-      shell: bash
-      run: poetry run pip --version >/dev/null 2>&1 || rm -rf .venv
+      run: poetry run pip --version || rm -rf .venv
 
     - name: Lint
-      shell: bash
       run: |
-        pwd
-        ls -alh
         make lint
 
   test:
@@ -68,18 +62,18 @@ jobs:
 
     - name: Get full Python version
       id: full-python-version
-      shell: bash
       run: echo ::set-output name=version::$(python -c "import sys; print('-'.join(str(v) for v in sys.version_info))")
 
-    - name: Install Poetry
-      shell: bash
+    - name: Install Poetry using bash
+      if: matrix.os == 'ubuntu' || matrix.os == 'macos'
       run: |
         curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
         echo "::add-path::$HOME/.poetry/bin"
 
-    - name: Setup PATH for the default shell on windows
+    - name: Install Poetry using pwsh
       if: matrix.os == 'windows'
       run: |
+        (Invoke-WebRequest -Uri https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py -UseBasicParsing).Content | python
         echo "::add-path::$HOME/.poetry/bin"
 
     - name: Set up cache
@@ -91,12 +85,8 @@ jobs:
 
     - name: Ensure cache is healthy
       if: steps.cache.outputs.cache-hit == 'true'
-      shell: bash
-      run: poetry run pip --version >/dev/null 2>&1 || rm -rf .venv
+      run: poetry run pip --version || rm -rf .venv
 
     - name: Test
-      shell: bash
       run: |
-        pwd
-        ls -alh
         make test
