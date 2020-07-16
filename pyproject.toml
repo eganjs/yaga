@@ -5,7 +5,10 @@ description = "Yet Another Generic Automator"
 authors = ["Joseph Egan <joseph.s.egan@gmail.com>"]
 license = "MIT"
 
+homepage = "https://github.com/eganjs/yaga"
 repository = "https://github.com/eganjs/yaga"
+
+readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.6"
