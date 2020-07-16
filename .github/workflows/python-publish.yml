@@ -19,7 +19,8 @@ jobs:
 
     - name: Get full Python version
       id: full-python-version
-      run: echo ::set-output name=version::$(python -c "import sys; print('-'.join(str(v) for v in sys.version_info))")
+      run: |
+        echo ::set-output name=version::$(python -c "import sys; print('-'.join(str(v) for v in sys.version_info))")
 
     - name: Install Poetry
       run: |
@@ -35,7 +36,8 @@ jobs:
 
     - name: Ensure cache is healthy
       if: steps.cache.outputs.cache-hit == 'true'
-      run: poetry run pip --version || rm -rf .venv
+      run: |
+        poetry run pip --version || rm -rf .venv
 
     - name: Get tag
       id: tag
