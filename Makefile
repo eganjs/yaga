@@ -1,4 +1,4 @@
-.PHONEY: lint fmt test
+.PHONEY: lint fmt test publish
 
 lint: .venv
 	poetry run flake8 --exclude .venv
@@ -11,6 +11,12 @@ fmt: .venv
 
 test: .venv
 	poetry run pytest --verbose --capture=no
+
+publish: dist
+	poetry publish
+
+dist: .venv
+	poetry build
 
 .venv: poetry.lock
 	poetry config virtualenvs.in-project true
