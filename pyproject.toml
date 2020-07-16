@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "yaga"
-version = "0.2.0"
-description = "Yet Another Great Automator"
+version = "0.2.1"
+description = "Yet Another Generic Automator"
 authors = ["Joseph Egan <joseph.s.egan@gmail.com>"]
 license = "MIT"
 
@@ -16,6 +16,8 @@ pytest = "^5.2"
 isort = "^5.1.1"
 black = "^19.10b0"
 flake8 = "^3.8.3"
+pyprojroot = "^0.2.0"
+toml = "^0.10.1"
 
 [tool.poetry.scripts]
 yaga = "yaga:cli"
