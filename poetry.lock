@@ -197,6 +197,14 @@ version = "2.4.7"
 
 [[package]]
 category = "dev"
+description = "Find project root paths and return relative project files"
+name = "pyprojroot"
+optional = false
+python-versions = "*"
+version = "0.2.0"
+
+[[package]]
+category = "dev"
 description = "pytest: simple powerful testing with Python"
 name = "pytest"
 optional = false
@@ -275,7 +283,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "9a87dde6def696236ea9dda5f6bc6de9268e85a45f661f5f75e14e9aa0d2da76"
+content-hash = "c91df9614da604a3bfea1f71a92449450dc7568f6807e63b34ca79c9da6b6793"
 python-versions = "^3.6"
 
 [metadata.files]
@@ -350,6 +358,10 @@ pyflakes = [
 pyparsing = [
     {file = "pyparsing-2.4.7-py2.py3-none-any.whl", hash = "sha256:ef9d7589ef3c200abe66653d3f1ab1033c3c419ae9b9bdb1240a85b024efc88b"},
     {file = "pyparsing-2.4.7.tar.gz", hash = "sha256:c203ec8783bf771a155b207279b9bccb8dea02d8f0c9e5f8ead507bc3246ecc1"},
+]
+pyprojroot = [
+    {file = "pyprojroot-0.2.0-py3-none-any.whl", hash = "sha256:741e8b4878a0d6bb6b06ec09aa05797130289e2127aa595b8f1cbadce697909f"},
+    {file = "pyprojroot-0.2.0.tar.gz", hash = "sha256:a79900dc52ee097bfd8d917a3d45e2b98494c47a57ba3a71bf609d7a156732e8"},
 ]
 pytest = [
     {file = "pytest-5.4.3-py3-none-any.whl", hash = "sha256:5c0db86b698e8f170ba4582a492248919255fcd4c79b1ee64ace34301fb589a1"},
