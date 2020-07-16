@@ -44,6 +44,10 @@ jobs:
       run: |
         make lint
 
+    - name: Check for unexpected file modifications
+      run: |
+        git diff --exit-code
+
   test:
     needs: lint
     name: ${{ matrix.os }} / ${{ matrix.python-version }}
@@ -94,3 +98,7 @@ jobs:
     - name: Test
       run: |
         make test
+
+    - name: Check for unexpected file modifications
+      run: |
+        git diff --exit-code
