@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "yaga"
-version = "0.2.1"
+version = "0.2.2"
 description = "Yet Another Generic Automator"
 authors = ["Joseph Egan <joseph.s.egan@gmail.com>"]
 license = "MIT"
