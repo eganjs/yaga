@@ -1,4 +1,4 @@
-.PHONEY: lint fmt test publish
+.PHONEY: lint fmt test publish dist
 
 lint: .venv
 	poetry run flake8 --exclude .venv
@@ -19,7 +19,6 @@ dist: .venv
 	poetry build
 
 .venv: poetry.lock
-	poetry config virtualenvs.in-project true
 	poetry install
 	@touch -c .venv
 
